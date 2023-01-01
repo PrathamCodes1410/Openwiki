@@ -1,0 +1,22 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    New Page
+{% endblock %}
+
+{% block body %}
+    <h1>Create a new Wiki Page</h1>
+    <br>
+    <form action="{% url 'save' %}" method="post">
+        {% csrf_token %}
+        <h5>Enter your Title: </h5>
+        <textarea name="title" style="height: 35px; font-weight: bolder;"></textarea>
+        <br>
+        <br>
+        <h5>Enter your content: </h5>
+        <textarea name="content" style="height: 175px;"></textarea>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}
