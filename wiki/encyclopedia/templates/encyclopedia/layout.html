@@ -9,22 +9,35 @@
         <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
     </head>
     <body>
-        <div class="row">
-            <div class="sidebar col-lg-2 col-md-3">
-                <h2>Wiki</h2>
-                <form action="{% url 'search' %}" method="post">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: whitesmoke;">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'index' %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'new' %}">Create New Page</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'random' %}">Random Page</a>
+                  </li>
+                </ul>
+                <form class="row g-3" action="{% url 'search' %}" method="post">
                     {% csrf_token %}
-                    <input class="search" type="text" name="q" placeholder="Search Encyclopedia">
-                </form>
-                <div>
-                    <a href="{% url 'index' %}">Home</a>
-                </div>
-                <div>
-                    <a href="{% url 'new' %}">Create New Page</a>
-                </div>
-                <div>
-                    <a href="{% url 'random' %}">Random Page</a>
-                </div>
+                    <div class="col-auto" style="padding: 13px; margin-left: 5px;">
+                        <input class="search" type="text" name="q" placeholder="Search Encyclopedia">
+                    </div>
+                    <div class="col-auto">
+                      <button type="submit" class="btn btn-primary mb-2">Wiki Search</button>
+                    </div>
+                  </form>
+              </div>
+            </div>
+          </nav>
                 {% block nav %}
                 {% endblock %}
             </div>
