@@ -1,6 +1,20 @@
 # Openwiki
 An Open Source Wikipedia
 
+To get going:
+
+1. Make sure you installed Django and Markdown2
+
+Django : https://www.djangoproject.com/download/
+Markdown2 : https://github.com/trentm/python-markdown2
+
+2. Then clone this repo
+3. Open the file in terminal
+4. Run: 
+
+`python manage.py runserver`
+
+5. Your server is running
 
 Main Page
 
