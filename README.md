@@ -1,4 +1,5 @@
-![Screenshot_20230127_110027-removebg-preview](https://user-images.githubusercontent.com/79313374/215017980-7c10b9d7-dee5-4a4e-bc3a-7785d017815c.png)
+![openwiki](https://user-images.githubusercontent.com/79313374/215111912-c9f1e1b0-beaa-4f5d-9b7a-df9c40e89e89.png)
+
 
 
 To get going:
