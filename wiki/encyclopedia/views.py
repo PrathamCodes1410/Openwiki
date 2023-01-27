@@ -6,11 +6,10 @@ from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 
 
-
 from django.http import HttpResponse, HttpResponseRedirect
 
 
-from .models import User
+from .models import User, Author
 from . import util
 
 
@@ -19,11 +18,14 @@ def index(request):
         "entries": util.list_entries()
     })
 
+
 def login(request):
     return render(request, "encyclopedia/login.html")
 
+
 def register(request):
     return render(request, "encyclopedia/register.html")
+
 
 def login_auth(request):
     if request.method == "POST":
@@ -45,6 +47,7 @@ def login_auth(request):
     else:
         return render(request, "encyclopedia/login.html")
 
+
 def register_auth(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -59,7 +62,7 @@ def register_auth(request):
 
         # Attempt to create new user
         try:
-            user = User.objects.create_user(username, password = password)
+            user = User.objects.create_user(username, password=password)
             user.save()
         except IntegrityError:
             return render(request, "encyclopedia/register.html", {
@@ -67,9 +70,9 @@ def register_auth(request):
             })
         login(request)
         return render(request, "encyclopedia/login.html", {
-                "s_message": "Account Successfully Created"
-            })
-        
+            "s_message": "Account Successfully Created"
+        })
+
     else:
         return render(request, "encycloepedia/register.html")
 
@@ -89,13 +92,15 @@ def convert(title):
 
 
 def display(request, title):
+    f_writer = Author.objects.get(title = title)
     page = convert(title)
     if page == None:
         return render(request, "encyclopedia/error.html")
     else:
         return render(request, "encyclopedia/page.html", {
             "title": title,
-            "content": page
+            "content": page,
+            "author" : f_writer,
         })
 
 
@@ -121,13 +126,19 @@ def search(request):
 
 
 def new(request):
-    return render(request, "encyclopedia/create.html")
+    if request.user.is_authenticated == False:
+        return render(request, "encyclopedia/login.html", {
+            "message": "Please login to your account to create page"
+        })
+    else:
+        return render(request, "encyclopedia/create.html")
 
 
 def save(request):
     if request.method == "POST":
         s_title = request.POST['title']
         s_content = request.POST['content']
+        s_writer = request.POST['writer']
 
         for titles in util.list_entries():
             if s_title == titles:
@@ -135,19 +146,38 @@ def save(request):
 
         util.save_entry(s_title, s_content)
 
+        f_writer = User.objects.get(username = s_writer)
+
+        entry = Author(
+            title=s_title,
+            d_writer=f_writer,
+        )
+
+        entry.save()
+
         return render(request, "encyclopedia/index.html", {
             "entries": util.list_entries()
         })
 
-def edit(request):
-    if request.method == "POST":
-        s_title = request.POST['e_title']
-        s_content = util.get_entry(s_title)
 
-    return render(request, "encyclopedia/edit.html", {
-        "edit_title": s_title,
-        "edit_content": s_content,
-    })
+def edit(request):
+    if request.user.is_authenticated == False:
+        return render(request, "encyclopedia/login.html", {
+            "message": "Please login to your account to edit"
+        })
+    else:
+        if request.method == "POST":
+            s_title = request.POST['e_title']
+            s_content = util.get_entry(s_title)
+            current_user = request.POST['e_user']
+            s_author = request.POST['e_author']
+            if current_user == s_author:
+                return render(request, "encyclopedia/edit.html", {
+                "edit_title": s_title,
+                "edit_content": s_content,
+            })
+            else:
+                return render(request, "encyclopedia/notauthorized.html")
 
 
 def save_edit(request):

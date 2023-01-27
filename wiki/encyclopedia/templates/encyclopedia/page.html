@@ -8,9 +8,12 @@
 
     <br>
     <br>
+    <p>Created by <strong>{{ author }}</strong></p>
     <br>
     <form action="{% url 'edit' %}" method="post">
         {% csrf_token %}
+        <input type="hidden" value="{{ author }}" name="e_author">
+        <input type="hidden" value="{{ user.get_username }}" name="e_user">
         <input type="hidden" value="{{ title }}" name="e_title">
         <input type="submit" class="btn btn-warning" value="Edit">
     </form>

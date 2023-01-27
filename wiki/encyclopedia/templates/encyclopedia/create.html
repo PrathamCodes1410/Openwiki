@@ -16,6 +16,7 @@
         <h5>Enter your content: </h5>
         <textarea name="content" style="height: 175px;"></textarea>
         <br>
+        <input type="hidden" value="{{ request.user.username }}" name="writer">
         <br>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
