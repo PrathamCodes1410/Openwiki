@@ -1,5 +1,5 @@
-# Openwiki
-An Open Source Wikipedia
+![Screenshot_20230127_110027-removebg-preview](https://user-images.githubusercontent.com/79313374/215017980-7c10b9d7-dee5-4a4e-bc3a-7785d017815c.png)
+
 
 To get going:
 
