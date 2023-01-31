@@ -1,13 +1,46 @@
 body {
+    background-color: lightgray;
     margin: 0;
     font-family: "Roboto", Arial, sans-serif;
+    clip-path: circle(25%);
+    transition: clip-path 1s;
+    
+    
+  }
+
+.main_bg {
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(50%, rgb(0,123,255)), color-stop(50%,rgb(197, 215, 232)));
+    background: -webkit-linear-gradient(top left, rgb(0,123,255) 50%, rgb(197, 215, 232) 50%);
+    background: -o-linear-gradient(top left, rgb(0,123,255) 50%, rgb(197, 215, 232) 50%);
+    background: linear-gradient(to bottom right, rgb(0,123,255) 50%, rgb(197, 215, 232) 50%);
+    animation: slide 10s ease-in-out infinite alternate;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: -50%;
+    right: -50%;
+    opacity: 0.7;
+    z-index: -1;
+  }
+
+@keyframes slide {
+    0% {
+        transform: translateX(-25%);
+    }
+    100% {
+        transform: translateX(25%);
+    }
+}
+
+body:hover {
+    clip-path: circle(100%);
   }
   
-  nav {
+nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: lightgray;
+    background-color: rgb(37, 189, 240);
     padding: 20px;
     position: fixed;
     top: 0;
@@ -15,13 +48,13 @@ body {
     box-sizing: border-box;
   }
   
-  nav a {
+nav a {
     color: black;
     text-decoration: none;
     margin: 0 20px;
   }
   
-  .header {
+.header {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,21 +62,22 @@ body {
     flex-direction: column;
   }
   
-  h1 {
+h1 {
     font-size: 60px;
     text-align: center;
     opacity: 1;
     animation: fadein 2s;
   }
   
-  h2 {
+h2 {
     font-size: 40px;
     text-align: center;
     opacity: 1;
     animation: fadein 8s;
   }
-  
-  @keyframes fadein {
+
+
+@keyframes fadein {
     from {
       opacity: 0;
     }
@@ -51,8 +85,3 @@ body {
       opacity: 1;
     }
   }
-  
-  * {
-    box-sizing: border-box;
-  }
-  
