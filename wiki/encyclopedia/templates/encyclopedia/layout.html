@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% load static %}
 
 <!DOCTYPE html>
@@ -71,4 +72,79 @@
 
 </body>
 
+=======
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link id="theme" href="{% static 'encyclopedia/light.css' %}" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav d-flex flex-grow-1 justify-content-around align-items-center">
+          <li class="nav-item">
+            <div>
+              {% if request.user.is_authenticated %}
+              Signed in as <strong>{{ request.user.username }}</strong>
+              {% else %}
+              Not signed in.
+              {% endif %}
+            </div>
+          </li>
+          <li class="nav-item">
+            <div>
+              {% if user.is_authenticated %}
+              <form class=" d-lg-flex"action="{% url 'logout_view' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary mb-1">Logout</button>
+              </form>
+              {% else %}
+              <a href="{% url 'login' %}"><button type="submit" class="btn btn-primary mb-1">Log In</button></a>
+              {% endif %}
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'new' %}">Create New Page</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'random' %}">Random Page</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="post">
+          {% csrf_token %}
+          <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search Encyclopedia">
+          <button type="submit" class="btn btn-primary my-2 my-sm-0">Wiki Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  
+  {% block nav %}
+  {% endblock %}
+  </div>
+  <div class="main col-lg-10 col-md-9">
+    {% block body %}
+    {% endblock %}
+  </div>
+  </div>
+
+</body>
+
+>>>>>>> 49e9c3206ba2ae3222daf978736c477e7ac98c3e
 </html>
