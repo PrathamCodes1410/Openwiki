@@ -13,11 +13,13 @@ from .models import User, Author
 from . import util
 
 
-def index(request):
-    return render(request, "encyclopedia/index.html", {
+def home(request):
+    return render(request, "encyclopedia/home.html", {
         "entries": util.list_entries()
     })
 
+def index(request):
+    return render(request, "encyclopedia/index.html")
 
 def login(request):
     return render(request, "encyclopedia/login.html")
@@ -79,7 +81,7 @@ def register_auth(request):
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse("index"))
+    return HttpResponseRedirect(reverse("home"))
 
 
 def convert(title):
@@ -155,7 +157,7 @@ def save(request):
 
         entry.save()
 
-        return render(request, "encyclopedia/index.html", {
+        return render(request, "encyclopedia/home.html", {
             "entries": util.list_entries()
         })
 

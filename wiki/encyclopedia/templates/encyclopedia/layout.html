@@ -12,32 +12,32 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: whitesmoke;">
+  <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav d-flex flex-grow-1 justify-content-around align-items-center">
+          <li class="nav-item">
+            <div>
+              {% if user.is_authenticated %}
+              <form class=" d-lg-flex"action="{% url 'logout_view' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary mb-1">Logout</button>
+              </form>
+              {% else %}
+              <a href="{% url 'login' %}"><button type="submit" class="btn btn-primary mb-1">Log In</button></a>
+              {% endif %}
+            </div>
+          </li>  
           <li class="nav-item">
             <div>
               {% if request.user.is_authenticated %}
               Signed in as <strong>{{ request.user.username }}</strong>
               {% else %}
               Not signed in.
-              {% endif %}
-            </div>
-          </li>
-          <li class="nav-item">
-            <div>
-              {% if user.is_authenticated %}
-              <form action="{% url 'logout_view' %}">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-primary mb-1">Logout</button>
-              </form>
-              {% else %}
-              <a href="{% url 'login' %}"><button type="submit" class="btn btn-primary mb-1">Log In</button></a>
               {% endif %}
             </div>
           </li>
@@ -51,21 +51,15 @@
             <a class="nav-link" href="{% url 'random' %}">Random Page</a>
           </li>
         </ul>
-        <form class="row g-3" action="{% url 'search' %}" method="post">
+        <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="post">
           {% csrf_token %}
-          <div class="col-auto" style="padding: 13px; margin-left: 5px;">
-            <input class="search" type="text" name="q" placeholder="Search Encyclopedia">
-          </div>
-          <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-2">Wiki Search</button>
-          </div>
+          <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search Openwiki">
+          <button type="submit" class="btn btn-primary my-2 my-sm-0">Wiki Search</button>
         </form>
-        <div>
-          <!--<button onclick="toggleTheme()">Switch</button>-->
-        </div>
       </div>
     </div>
   </nav>
+
   {% block nav %}
   {% endblock %}
   </div>

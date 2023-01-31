@@ -1,44 +1,56 @@
 {% load static %}
 
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wikipedia Login</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link href="{% static 'encyclopedia/light.css' %}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'encyclopedia/pr.css' %}">
+    <title>Register</title>
 </head>
 
 <body>
-  <div>
-  </div>
-  <div>
-    <h6 style="color: red;">{{ message }}</h6>
-  </div>
-  <div>
-    <form action="{% url 'register_auth' %}" method="post">
-      {% csrf_token %}
-      <h3>Register Here!</h3>
-      <br>
-      <div class="form-group">
-        <input class="form-control" autofocus type="text" name="username" placeholder="Username">
-      </div>
-      <div class="form-group">
-        <input class="form-control" type="password" name="password" placeholder="Password">
-      </div>
-      <div class="form-group">
-        <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
-      </div>
-      <input class="btn btn-primary" type="submit" value="Register">
-    </form>
-  </div>
-  <h6>Existing user? <a href="{% url 'login' %}">Login Here!</a></h6>
-  </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-12">
+                <div class="form">
+                    <form action="{% url 'register_auth' %}" method="post">
+                        {% csrf_token %}
+                        <br>
+                        <h1><img src="https://user-images.githubusercontent.com/79313374/215111912-c9f1e1b0-beaa-4f5d-9b7a-df9c40e89e89.png"
+                                width="500" height="200"></h1>
+                        <br>
+                        <div>
+                            <h6 style="color: red; font-family: Arial, Helvetica, sans-serif; font-size: medium;">{{ message }}</h6>
+                            <h6 style="color: green; font-family: Arial, Helvetica, sans-serif;font-size: medium;">{{ s_message }}</h6>
+                        </div>
+                        <br>
+                        <div class="input-group col-md-8 col-md-offset-2">
+                            <input class="input email" autofocus type="text" name="username" placeholder="Username">
+                        </div>
+                        <div class="input-group col-md-8 col-md-offset-2">
+                            <input class="input password" type="password" name="password" placeholder="Password">
+                        </div>
+                        <div class="input-group col-md-8 col-md-offset-2">
+                            <input class="input password" type="password" name="confirmation" placeholder="Confirm Password">
+                        </div>
+                        <div class="input-group">
+                            <div class="col-md-4 col-md-offset-4">
+                                <button type="submit">
+                                    REGISTER
+                                </button>
+                            </div>
+                        </div>
+                        <div class="forgot">
+                            <a href="{% url 'login' %}">Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

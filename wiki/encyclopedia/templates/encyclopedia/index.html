@@ -1,16 +1,25 @@
-{% extends "encyclopedia/layout.html" %}
+{% load static %}
 
-{% block title %}
-    Encyclopedia
-{% endblock %}
-
-{% block body %}
-    <h1>All Pages</h1>
-
-    <ul>
-        {% for entry in entries %}
-            <li><a href="{% url 'display' title=entry %}">{{ entry }}</a></li>
-        {% endfor %}
-    </ul>
-
-{% endblock %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'encyclopedia/style.css' %}">
+    <title>OpenWiki</title>
+  </head>
+  <body>
+    <nav>
+      <a href="{% url 'home' %}">Index</a>
+      <a href="#">About</a>
+      <a target="blank" href="https://github.com/PrathamCodes1410/Openwiki">Open-Source</a>
+      <a href="#">Support</a>
+      <a href="#">FAQ</a>
+    </nav>
+    <div class="header">
+      <h1>OpenWiki</h1>
+      <h2>An Open Source Wiki</h2>
+    </div>
+  </body>
+</html>
