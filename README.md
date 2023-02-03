@@ -23,5 +23,4 @@ Main Page
 
 
 
-Looking to add some new styles ; )
-Send in some pull requests
+
